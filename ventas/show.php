@@ -70,12 +70,12 @@ if (isset($_SESSION['mensaje'])) {
                             <table class="table table-bordered table-sm table">
                                 <thead>
                                 <tr>
-                                    <th style="background-color: #e7e7e7;text-alig: center">No.-</th>
-                                    <th style="background-color: #e7e7e7;text-alig: center">Producto</th>
-                                    <th style="background-color: #e7e7e7;text-alig: center">Detalle</th>
-                                    <th style="background-color: #e7e7e7;text-alig: center">Cantidad</th>
-                                    <th style="background-color: #e7e7e7;text-alig: center">Precio Unitario</th>
-                                    <th style="background-color: #e7e7e7;text-alig: center">Precio Total</th>
+                                    <th style="background-color: #e7e7e7;text-align: center">No.-</th>
+                                    <th style="background-color: #e7e7e7;text-align: center">Producto</th>
+                                    <th style="background-color: #e7e7e7;text-align: center">Detalle</th>
+                                    <th style="background-color: #e7e7e7;text-align: center">Cantidad</th>
+                                    <th style="background-color: #e7e7e7;text-align: center">Precio Unitario</th>
+                                    <th style="background-color: #e7e7e7;text-align: center">Precio Total</th>
 
                                 </tr>
                                 </thead>

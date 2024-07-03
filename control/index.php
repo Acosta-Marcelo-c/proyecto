@@ -5,8 +5,6 @@ include ('../layout/sesion.php');
 
 include ('../layout/parte1.php');
 include ('../app/controlador/roles/listado_roles.php');
-//include ('../app/controlador/control/listado_modulo.php');
-//include ('../app/controlador/control/cargar_control.php');
 
 if (isset($_SESSION['mensaje'])) {
   $respuesta=$_SESSION['mensaje']; ?>
@@ -36,7 +34,7 @@ unset($_SESSION['mensaje']);
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-12">
-                <h1 class="m-0">Registro de roles
+                <h1 class="m-0">Registro de Contol
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create">
                   <i class="fa fa-plus"></i> Agregar Nuevo Rol
                   </button>
@@ -67,8 +65,6 @@ unset($_SESSION['mensaje']);
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
                                 <th>Acciones</th>
-                                <th>Modulos Activados</th>
-                                <th>Acciones</th>
                               </tr>
                               <tbody>
 
@@ -84,34 +80,12 @@ unset($_SESSION['mensaje']);
                                     <td> <?php echo $contador= $contador+1;?></td>
                                     <td> <?php echo $rol_dato['rol_Nombre'];?></td>
                                     <td> <?php echo $rol_dato['rol_Descripcion'];?></td>
-                                    
                                     <td>
                                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-editar<?php echo $id_Rol;?>"><i class="fa fa-pencil-alt"></i> Editar</button>
                                       <!--<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-eliminar<?php echo $id_Rol;?>"><i class="fa fa-trash"></i> Eliminar</button>
                                       <div class="btn-group">
                                           <a href="update.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success"><i class="fa fa-pencil-alt"></i>Editar</a>
                                       </div>-->
-                                    </td>
-                                    <td>
-                                         <?php
-                                        $sql_modulo1 = "SELECT mod_Nombre
-                                        FROM modulo INNER JOIN rol_mod ON modulo.id_mod= rol_mod.id_mod 
-                                        INNER JOIN rol ON rol.id_Rol= rol_mod.id_Rol 
-                                        WHERE rol.id_Rol = $id_Rol;";
-                                        
-                                        $query_modulo1 = $pdo->prepare($sql_modulo1);
-                                        $query_modulo1->execute();
-                                        $modulo1_datos=$query_modulo1->fetchAll(PDO::FETCH_ASSOC);
-                                        
-                                          foreach($modulo1_datos as $modulo1_dato){
-                                           echo $modulo1_dato['mod_Nombre'], "/"; 
-                                         }
-                                        //}
-                                        ?>
-                                      
-                                      </td>
-                                    <td>
-                                    <a href="../control/create.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success btn-md"><i class="fa fa-pencil-alt"></i>Editar</a>
                                     </td>
 
                                   </tr>
@@ -238,9 +212,9 @@ include ('../layout/parte2.php');
  </script>
 
  <!--/ modal para registro de rol -->
-  <div class="modal fade" id="modal-create">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+ <div class="modal fade" id="modal-create">
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
        <div class="modal-header" style="background-color: #1d36b6 ; color: white">
          <h4 class="modal-title">Creacion de Rol</h4>
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -248,34 +222,37 @@ include ('../layout/parte2.php');
          </button>
        </div>
        <div class="modal-body ">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="">Nombre</label>
-                <input type="text" id="nombre_rol" class="form-control">
-                <small style="color: red; display: none" id="lbl_nombrerol">*Este campo es requerido</small>
-              </div>
+             <div class="row">
+               <div class="col-md-6">
+                 <div class="form-group">
+                   <label for="">Nombre</label>
+                   <input type="text" id="nombre_rol" class="form-control">
+                   <small style="color: red; display: none" id="lbl_nombre">*Este campo es requerido</small>
+                 </div>
+               </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                     <label for="">Descripcion</label>
+                     <textarea name="descripcion" id="descripcion_rol" rows="2" cols="30" class="form-control" ></textarea>
+                     <!--<input type="text" id="rcontraseña_usuario" cols="30" row="3" class="form-control"></input>-->
+                     <small style="color: red; display: none" id="lbl_descripcion">*Este campo es requerido</small>
+                   </div>
+                 </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-              <label for="">Descripcion</label>
-              <textarea name="descripcion" id="descripcion_rol" rows="2" cols="30" class="form-control" ></textarea>
-              <!--<input type="text" id="rcontraseña_usuario" cols="30" row="3" class="form-control"></input>-->
-              <small style="color: red; display: none" id="lbl_descripcionrol">*Este campo es requerido</small>
-            </div>
-          
-          </div>
-          
-        </div>
-       
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="btn_create">Guardar Rol</button>
-        </div>
+
+       </div>
+       <div class="modal-footer justify-content-between">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+         <button type="button" class="btn btn-primary" id="btn_create">Guardar Rol</button>
+
+       </div>
        <div id="respuesta"></div>
-      </div>
-    </div>
-  </div>
+     </div>
+     <!-- /.modal-content -->
+   </div>
+   <!-- /.modal-dialog -->
+ </div>
+ <!-- /.modal -->
 
  <script>
 
@@ -283,15 +260,14 @@ include ('../layout/parte2.php');
       //  alert("guardar");
       var nombre_rol = $('#nombre_rol').val();
       var descripcion_rol = $('#descripcion_rol').val();
-      
+
       if (nombre_rol == "") {
         $('#nombre_usuario').focus();
-        $('#lbl_nombrerol').css('display','block');
-       // alert("guardar");
+        $('#lbl_nombre').css('display','block');
 
       }else if (descripcion_rol== "") {
         $('#descripcion_rol').focus();
-        $('#lbl_descripcionrol').css('display','block');
+        $('#lbl_descripcion').css('display','block');
 
       }else {
 

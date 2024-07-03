@@ -136,6 +136,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
 
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="background-color: #0000ff">
+              <i class="fa fa-cog fa-1x fa-fw"></i>
+              <p>
+                Control
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo $URL;?>../../control/index.php" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p>Control</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo $URL;?>../../roles/create.php" class="nav-link">
+                  <i class="fa fa-address-book"></i>
+                  <p>Creacion de Roles</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link" style="background-color: #0000ff">
