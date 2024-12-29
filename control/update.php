@@ -7,6 +7,7 @@ include ('../layout/parte1.php');
 //include ('../app/controlador/roles/listado_Roles.php');
 include ('../app/controlador/control/listado_modulo.php');
 include ('../app/controlador/control/cargar_control.php');
+include ('../app/controlador/control/cargar_rol.php');
 
 if (isset($_SESSION['mensaje'])) {
   $respuesta=$_SESSION['mensaje']; ?>
@@ -36,7 +37,9 @@ unset($_SESSION['mensaje']);
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-12">
-          <h1 class="m-0">ROL <?php echo $control_rol_nombre;?></h1>
+          <h1 class="m-0">ROL <?php
+                        echo $control_rol_nombre;            
+                      ?></h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -48,7 +51,8 @@ unset($_SESSION['mensaje']);
         <div class="container-fluid">
             <div class="row">
               <div class="col-md-6">
-                <form action="../app/controlador/usuarios/crearUsuario.php" method="post">
+                <form action="../app/controlador/control/update_control.php" method="post">
+                  <input  type="text" value="<?php echo $id_Rol;?>" name="id_rol" hidden></input>
                     <div class="card card-outline cart-primary">
                         <div class="card-header">
                         <h3 class="card-title">Asignacion de modulos</h3>
@@ -73,28 +77,35 @@ unset($_SESSION['mensaje']);
                                     foreach ($modulo_datos as $modulo_dato) {
 
                                     $id_Mod = $modulo_dato['id_mod'];
-                                    //$id_Rol = $modulo_dato['id_Rol'];
                                     $nombre_Mod = $modulo_dato['mod_Nombre'];
                                     $estado_Mod = $modulo_dato['mod_Estado'];
                                     ?>
                                     <tr>
-                                        <td> <?php echo $contador=$contador+1;?></td>
-                                        <td> <?php echo $modulo_nombre3=$modulo_dato['mod_Nombre'];?></td>
-                                        <td> <?php echo $modulo_dato['mod_Estado'];?></td>
+                                        <td><?php echo $contador=$contador+1;?> </td>
+                                        <td> <?php echo $modulo_nombre3=$modulo_dato['mod_Nombre']?></td>
+                                        <td> <?php echo $mod_dato_id =$modulo_dato['id_mod'];?></td>
                                         <td>
-                                        <input type="checkbox"  name="nombre_rol_actu" id="nombre_rol_actu" 
+                                        <input type="checkbox" value="<?php echo $mod_dato_id;?>" name="control[]" 
                                         <?php
                                         foreach ($modulo2_datos as $modulo2_dato) {
                                           $control_rol_nombre2= $modulo2_dato['mod_Nombre'];
                                           $control_rol_nombre2;
                                           if($control_rol_nombre2== $modulo_nombre3){
-                                            echo "checked />";
+
+                                            ?>
+                                            checked 
+                                            <?php
+
                                           }else{
-                                            echo "";
+                                            ?>
+                                             value="0"
+                                            <?php
                                           }
                                         }
-                                        ?>
+                                        ?> 
                                         
+                                        />
+                                        <input type="text" name="contador" value="<?php echo $contador;?>"hidden/>
                                     </tr>   
                                     <?php
                                     }

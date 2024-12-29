@@ -68,7 +68,7 @@ unset($_SESSION['mensaje']);
                                 <th>Descripcion</th>
                                 <th>Acciones</th>
                                 <th>Modulos Activados</th>
-                                <th>Acciones</th>
+                                <!--<th>Acciones</th>-->
                               </tr>
                               <tbody>
 
@@ -92,7 +92,7 @@ unset($_SESSION['mensaje']);
                                           <a href="update.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success"><i class="fa fa-pencil-alt"></i>Editar</a>
                                       </div>-->
                                     </td>
-                                    <td>
+                                   <td>
                                          <?php
                                         $sql_modulo1 = "SELECT mod_Nombre
                                         FROM modulo INNER JOIN rol_mod ON modulo.id_mod= rol_mod.id_mod 
@@ -110,9 +110,11 @@ unset($_SESSION['mensaje']);
                                         ?>
                                       
                                       </td>
-                                    <td>
-                                    <a href="../control/create.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success btn-md"><i class="fa fa-pencil-alt"></i>Editar</a>
+                                    <!-- <td>
+                                    <a href="../control/update.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success btn-md"><i class="fa fa-pencil-alt"></i>Editar</a>
                                     </td>
+
+                                        -->
 
                                   </tr>
                                     <!--/ modal para Editar de rol -->

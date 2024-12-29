@@ -7,7 +7,7 @@ $email_session = $_SESSION['sesion_email'];
 
 $sql = "SELECT per.id_Persona as id_Persona, per.per_Nombre as per_Nombre,
 per.per_Correo as per_Correo, per.per_Estado as per_Estado,
-rol.rol_Nombre as rol_nombre FROM persona as per INNER JOIN
+rol.rol_Nombre as rol_nombre, rol.id_Rol as id_Rol FROM persona as per INNER JOIN
  rol ON PER.id_Rol= rol.id_Rol WHERE per_Correo='$email_session'";
 $query = $pdo->prepare($sql);
 $query->execute();
@@ -16,6 +16,8 @@ foreach ($usuario as $usuari) {
 $id_usuario_session = $usuari['id_Persona'];
 $nombre_session = $usuari['per_Nombre'];
 $rol_session = $usuari['rol_nombre'];
+$rol_id = $usuari['id_Rol'];
+
 }
 
 
@@ -23,6 +25,7 @@ $rol_session = $usuari['rol_nombre'];
   echo "no existe secion";
   header('Location: '.$URL.'/login');
 }
+
 
 
 

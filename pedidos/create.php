@@ -67,9 +67,9 @@ if (isset($_SESSION['mensaje'])) {
                             }
                             ?>
                           <h3 class="card-title"><i class="fa fa-shopping-bag"></i>  Pedidos No.-
-                            <input  type="text" style="text-align: center" value="<?php echo  $contadorPedido;?>" disabled>contador</h3>
-                            <input  type="text" style="text-align: center" value="<?php echo  $num_ped;?>" >nume</h3>
-                            <input  type="text" style="text-align: center" value="<?php echo  $max;?>" >maxi</h3>
+                            <input  type="text" style="text-align: center" value="<?php echo  $contadorPedido;?>" disabled><!--contador--></h3>
+                            <input  type="text" style="text-align: center" value="<?php echo  $num_ped;?>" hidden><!--nume--></h3>
+                            <input  type="text" style="text-align: center" value="<?php echo  $max;?>" hidden><!--maxi--></h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                   <i class="fas fa-minus"></i>
@@ -221,13 +221,13 @@ if (isset($_SESSION['mensaje'])) {
                               <table class="table table-bordered table-sm table">
                                   <thead>
                                   <tr>
-                                      <th style="background-color: #e7e7e7;text-alig: center">No.-</th>
-                                      <th style="background-color: #e7e7e7;text-alig: center">Producto</th>
-                                      <th style="background-color: #e7e7e7;text-alig: center">Detalle</th>
-                                      <th style="background-color: #e7e7e7;text-alig: center">Cantidad</th>
-                                      <th style="background-color: #e7e7e7;text-alig: center">Precio Unitario</th>
-                                      <th style="background-color: #e7e7e7;text-alig: center">Precio Total</th>
-                                      <th style="background-color: #e7e7e7;text-alig: center">Accion</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">No.-</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">Producto</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">Detalle</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">Cantidad</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">Precio Unitario</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">Precio Total</th>
+                                      <th style="background-color: #e7e7e7;text-align: center">Accion</th>
                                   </tr>
                                   </thead>
                                   <tbody>

@@ -12,7 +12,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="<?php echo $URL;?>/public/templaes/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?php
+
+use function PHPSTORM_META\type;
+
+ echo $URL;?>/public/templaes/AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $URL;?>/public/templaes/AdminLTE-3.2.0/dist/css/adminlte.min.css">
 
@@ -90,6 +94,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo $nombre_session;?></a>
+          <a href="#" class="d-block"><?php echo $rol_session?></a>
+          <?php
+             $sql_mod="SELECT modu.mod_Nombre FROM rol_mod as rolMod 
+                  INNER JOIN modulo as modu ON ROLMod.id_mod = modu.id_mod WHERE id_Rol = $rol_id";
+                  
+                  $query_mod=$pdo->prepare($sql_mod);
+                  $query_mod->execute();
+                  $mod_datos=$query_mod->fetchAll(PDO::FETCH_ASSOC);
+
+              foreach($mod_datos as $mod_dato){
+                    $mod_nombre=$mod_dato['mod_Nombre'];
+                      //echo $mod_nombre,'/';
+                  }  ?>
         </div>
       </div>
 
@@ -104,39 +121,66 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
         </div>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
-
-          <li class="nav-item">
+               
+              <?php 
+                    $esto1 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Usuario"){
+                      $esto1 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto1==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <a href="#" class="nav-link" style="background-color: #0000ff">
-              <i class="nav-icon fas fa-users" ></i>
-              <p>
-                Usuarios
-                <i class="right fas fa-angle-left"></i>
-              </p>
+               <i class="nav-icon fas fa-users" ></i>
+                <p>
+                   Usuarios
+                  <i class="right fas fa-angle-left"></i>
+                </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo $URL;?>../../usuarios/index.php" class="nav-link">
-                  <i class="nav-icon fas fa-list"></i>
-                  <p>Listado Usuario</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo $URL;?>../../usuarios/create.php" class="nav-link">
-                  <i class="fas fa-user-plus"></i>
-                  <p>Creacion de Usuarios</p>
-                </a>
-              </li>
-            </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo $URL;?>../../usuarios/index.php" class="nav-link">
+                    <i class="nav-icon fas fa-list"></i>
+                    <p>Listado Usuario</p>
+                  </a>
+                </li>
+                <!--<li class="nav-item">
+                  <a href="<?php echo $URL;?>../../usuarios/create.php" class="nav-link">
+                    <i class="fas fa-user-plus"></i>
+                    <p>Creacion de Usuarios</p>
+                  </a>
+                </li> -->
+              </ul>
           </li>
-
-          <li class="nav-item">
+          <?php 
+                    $esto2 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Control"){
+                      $esto2 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto2==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="fa fa-cog fa-1x fa-fw"></i>
               <p>
@@ -151,16 +195,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Control</p>
                 </a>
               </li>
-              <li class="nav-item">
+             <!-- <li class="nav-item">
                 <a href="<?php echo $URL;?>../../roles/create.php" class="nav-link">
                   <i class="fa fa-address-book"></i>
                   <p>Creacion de Roles</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 
-          <li class="nav-item">
+          <?php 
+                    $esto3 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Roles"){
+                      $esto3 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto3==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="nav-icon fas fa-address-card" ></i>
               <p>
@@ -175,17 +234,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Listado Roles</p>
                 </a>
               </li>
-              <li class="nav-item">
+             <!-- <li class="nav-item">
                 <a href="<?php echo $URL;?>../../roles/create.php" class="nav-link">
                   <i class="fa fa-address-book"></i>
                   <p>Creacion de Roles</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 
-
-          <li class="nav-item">
+          <?php 
+                    $esto4 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Categoria"){
+                      $esto4 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto4==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="nav-icon fas fa-tags" ></i>
               <p>
@@ -203,11 +276,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
 
+          <?php 
+                    $esto5 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Almacen"){
+                      $esto5 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto5==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
 
-
-
-
-          <li class="nav-item">
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="fa fa-store" ></i>
               <p>
@@ -231,8 +316,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
 
-
-          <li class="nav-item">
+          <?php 
+                    $esto6 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Compras"){
+                      $esto6 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto6==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="fas fa-shopping-cart" ></i>
               <p>
@@ -256,7 +355,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
 
-          <li class="nav-item">
+          <?php 
+                    $esto7 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Proveedores"){
+                      $esto7 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto7==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
+          
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="fa fa-truck" ></i>
               <p>
@@ -271,16 +386,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Listado de Proveedores</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a href="<?php echo $URL;?>../../proveedores/create.php" class="nav-link">
                   <i class="fa fa-plus-circle"></i>
                   <p>Creacion Proveedores</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 
-          <li class="nav-item">
+          <?php 
+                    $esto8 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Pedido"){
+                      $esto8 = "1";
+                  }   
+                } 
+                ?> 
+                
+          <li class="nav-item" <?php  if ($esto8==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <a href="#" class="nav-link" style="background-color: #0000ff">
               <i class="nav-econ fas fa-shopping-basket" ></i>
               <p>

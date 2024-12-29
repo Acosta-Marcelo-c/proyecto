@@ -12,6 +12,8 @@ include ('controlador/categorias/listado_categorias.php');
 include ('controlador/almacen/listado_productos.php');
 include ('controlador/proveedores/listado_proveedores.php');
 include ('controlador/compras/listado_compras.php');
+include ('controlador/venta/listado_venta.php');
+
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -29,7 +31,18 @@ include ('controlador/compras/listado_compras.php');
   </div>
   <!-- /.content-header -->
 
+  <?php
+             $sql_mod="SELECT modu.mod_Nombre FROM rol_mod as rolMod 
+                  INNER JOIN modulo as modu ON ROLMod.id_mod = modu.id_mod WHERE id_Rol = $rol_id";
+                  
+                  $query_mod=$pdo->prepare($sql_mod);
+                  $query_mod->execute();
+                  $mod_datos=$query_mod->fetchAll(PDO::FETCH_ASSOC);
 
+              foreach($mod_datos as $mod_dato){
+                    $mod_nombre=$mod_dato['mod_Nombre'];
+                     // echo $mod_nombre,'/';
+                  }  ?>
 
   <!-- Main content -->
   <div class="content">
@@ -41,9 +54,22 @@ Contenido del sistema
 <br>
 <br>
 <div class="row">
-
+                <?php 
+                    $esto1 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Usuario"){
+                      $esto1 = "1";
+                  }   
+                } 
+                ?> 
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6" <?php  if ($esto1==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <!-- small card -->
             <div class="small-box bg-warning">
               <div class="inner">
@@ -69,7 +95,21 @@ Contenido del sistema
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <?php 
+                    $esto2 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Roles"){
+                      $esto2 = "1";
+                  }   
+                } 
+                ?> 
+          <div class="col-lg-3 col-6" <?php  if ($esto2==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?> >
             <!-- small card -->
             <div class="small-box bg-info">
               <div class="inner">
@@ -95,7 +135,21 @@ Contenido del sistema
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <?php 
+                  $esto3 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Categoria"){
+                      $esto3 = "1";
+                  }   
+                } 
+                ?> 
+          <div class="col-lg-3 col-6" <?php  if ($esto3==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?>>
             <!-- small card -->
             <div class="small-box bg-success">
               <div class="inner">
@@ -119,7 +173,21 @@ Contenido del sistema
           </div>
 
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <?php 
+                    $esto4 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Almacen"){
+                      $esto4 = "1";
+                  }   
+                } 
+                ?>
+          <div class="col-lg-3 col-6"<?php  if ($esto4==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?>>
             <!-- small card -->
             <div class="small-box bg-primary">
               <div class="inner">
@@ -143,7 +211,21 @@ Contenido del sistema
           </div>
 
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <?php 
+                    $esto5 =0;
+                  foreach($mod_datos as $mod_dato){
+                    $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+                    if($mod_nombre1=="Proveedores"){
+                      $esto5 = "1";
+                  }   
+                } 
+                ?> 
+          <div class="col-lg-3 col-6" <?php  if ($esto5==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?>>
             <!-- small card -->
             <div class="small-box bg-dark">
               <div class="inner">
@@ -168,7 +250,21 @@ Contenido del sistema
 <!-- ./col -->
 
 <!-- ./col -->
-<div class="col-lg-3 col-6">
+      <?php 
+         $esto6 =0;
+          foreach($mod_datos as $mod_dato){
+          $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+          if($mod_nombre1=="Compras"){
+           $esto6 = "1";
+                  }   
+                } 
+        ?>
+<div class="col-lg-3 col-6"<?php  if ($esto6==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?>>
   <!-- small card -->
   <div class="small-box bg-danger">
     <div class="inner">
@@ -193,24 +289,38 @@ Contenido del sistema
 <!-- ./col -->
 
 <!-- ./col -->
-<div class="col-lg-3 col-6">
+        <?php 
+          $esto7 =0;
+           foreach($mod_datos as $mod_dato){
+            $mod_nombre1=$mod_dato['mod_Nombre'];
+                                 
+            if($mod_nombre1=="Pedido"){
+            $esto7 = "1";
+            }   
+           } 
+        ?> 
+<div class="col-lg-3 col-6"<?php  if ($esto7==1){
+                  echo "";
+                }else {echo "hidden";}
+                  
+                ?>>
   <!-- small card -->
-  <div class="small-box bg-danger">
+  <div class="small-box bg-secondary">
     <div class="inner">
       <?php
-      $contador_de_proveedor =0;
-      foreach ($compras_datos as $compras_dato) {
-      $contador_de_proveedor= $contador_de_proveedor+1;
+      $contador_de_venta =0;
+      foreach ($ventas_datos as $ventas_dato) {
+      $contador_de_venta= $contador_de_venta+1;
       }
       ?>
-      <h3><?php echo $contador_de_proveedor;?><sup style="font-size: 20px"></sup></h3>
+      <h3><?php echo $contador_de_venta;?><sup style="font-size: 20px"></sup></h3>
 
-      <p>Compras Registradas</p>
+      <p>Ventas Registradas</p>
     </div>
     <div class="icon">
       <i class="nav-econ fas fa-shopping-basket"></i>
     </div>
-    <a href="<?php echo $URL;?>/../compras/index.php" class="small-box-footer">
+    <a href="<?php echo $URL;?>/../ventas/index.php" class="small-box-footer">
       More info <i class="fas fa-arrow-circle-right"></i>
     </a>
   </div>

@@ -3,6 +3,7 @@ include ('../app/config.php');
 
 $id_Rol = $_GET['id'];
 
+//echo $id_Rol;
 /*$sql_modulo2 = "SELECT* 
 FROM rol
 WHERE rol.id_Rol = '$id_Rol';";*/
@@ -20,7 +21,8 @@ $modulo2_datos=$query_modulo2->fetchAll(PDO::FETCH_ASSOC);
 foreach ($modulo2_datos as $modulo2_dato) {
 
     $control_rol_nombre= $modulo2_dato['rol_Nombre'];
-    
+    $control_rol_id= $modulo2_dato['id_Rol'];
+    $control_mod_id= $modulo2_dato['id_mod'];
 
 }
 

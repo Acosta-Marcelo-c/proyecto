@@ -35,9 +35,9 @@ unset($_SESSION['mensaje']);
             <div class="row mb-2">
               <div class="col-sm-12">
                 <h1 class="m-0">Registro de Contol
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create">
+                  <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create">
                   <i class="fa fa-plus"></i> Agregar Nuevo Rol
-                  </button>
+                  </button>-->
                 </h1>
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -63,7 +63,7 @@ unset($_SESSION['mensaje']);
                               <tr>
                                 <th>Nro</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
+                                <th>Modulos Activos</th>
                                 <th>Acciones</th>
                               </tr>
                               <tbody>
@@ -79,13 +79,25 @@ unset($_SESSION['mensaje']);
                                   <tr>
                                     <td> <?php echo $contador= $contador+1;?></td>
                                     <td> <?php echo $rol_dato['rol_Nombre'];?></td>
-                                    <td> <?php echo $rol_dato['rol_Descripcion'];?></td>
+                                    <td> 
+                                    <?php
+                                        $sql_modulo1 = "SELECT mod_Nombre
+                                        FROM modulo INNER JOIN rol_mod ON modulo.id_mod= rol_mod.id_mod 
+                                        INNER JOIN rol ON rol.id_Rol= rol_mod.id_Rol 
+                                        WHERE rol.id_Rol = $id_Rol;";
+                                        
+                                        $query_modulo1 = $pdo->prepare($sql_modulo1);
+                                        $query_modulo1->execute();
+                                        $modulo1_datos=$query_modulo1->fetchAll(PDO::FETCH_ASSOC);
+                                        
+                                          foreach($modulo1_datos as $modulo1_dato){
+                                           echo $modulo1_dato['mod_Nombre'], "/"; 
+                                         }
+                                        //}
+                                        ?>
+                                    </td>
                                     <td>
-                                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-editar<?php echo $id_Rol;?>"><i class="fa fa-pencil-alt"></i> Editar</button>
-                                      <!--<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-eliminar<?php echo $id_Rol;?>"><i class="fa fa-trash"></i> Eliminar</button>
-                                      <div class="btn-group">
-                                          <a href="update.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success"><i class="fa fa-pencil-alt"></i>Editar</a>
-                                      </div>-->
+                                    <a href="../control/update.php?id=<?php echo $id_Rol?>" type="button" class="btn btn-success btn-md"><i class="fa fa-pencil-alt"></i>Editar</a>
                                     </td>
 
                                   </tr>
